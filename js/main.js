@@ -1,9 +1,6 @@
 
-let comprar = false;
-while(!comprar){
-    let productos = parseInt(prompt("Que producto deseas comprar 1.Celular 2.Notebook 3.Tablet"))
-
-    switch(productos){
+function mostrarProducto(codigo) {
+    switch(codigo){
         case 1:
             console.log("Celular");
             break;
@@ -14,15 +11,35 @@ while(!comprar){
             console.log("Tablet");
             break;
         default:
-            alert("Opcion incorrecta");
-    }
-    let seguirComprando = prompt("Deseas seguir comprando ? si o no").toLowerCase();
-    
-    if (seguirComprando == "si"){
-        comprar = false;
-    } else if (seguirComprando == "no"){
-        comprar = true;
-    } else{
-        alert("Respuesta incorrecta");
+            alert("Opcion incorrecta")
     }
 }
+
+const evaluarContinuacion = (respuesta) => {
+    if (respuesta == "si"){
+        return false;
+    }
+    else if (respuesta == "no"){
+        return true ;
+    }
+    else {
+        alert ("Respuesta incorrecta");
+        return false;
+    }
+}
+
+const iniciarTienda = () =>{
+    let comprar = false;
+    while (!comprar){
+        let opcionProducto = parseInt(prompt("Que producto deseas comprar\n" +
+          "1.Celular\n" +
+          "2.Notebook\n" +
+          "3.Tablet"
+        ));
+      mostrarProducto(opcionProducto);
+      let respuestaUsuario = prompt("Deseas seguir comprando? si o no");
+      comprar = evaluarContinuacion(respuestaUsuario);
+    }
+}
+
+iniciarTienda();
