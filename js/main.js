@@ -1,66 +1,56 @@
 
+class Producto {
+    static id = 0
+    constructor(categoria, marca, modelo, almacenamiento, precio) {
+        this.id = ++Producto.id;
+        this.categoria = categoria;
+        this.marca = marca;
+        this.modelo = modelo;
+        this.almacenamiento = almacenamiento;
+        this.precio = precio;
+    }
+}
+
+const celular1 = new Producto("Celular", "Iphone", "18 Pro Max", "256gb", 1800);
+const tablet1 = new Producto("Tablet", "Samsung", "Tab s12 Ultra", "256gb", 2000);
+const notebook1 = new Producto("Notebook", "Apple", "Macbook Pro 14", "1TB", 2500);
+const playstation1 = new Producto("Playstation", "Sony", "Playstation 4 Pro", "1TB", 300);
+
 const carritos = []
 let comprar = false;
+
 while(!comprar){
-let opcionProductos = parseInt(prompt("Que productos deseas comprar\n" +
-    "1.celular\n" +
-    "2.tablet\n" +
-    "3.notebook\n" +
-    "4.playstation"
-))
-switch(opcionProductos){
-    case 1:
-        carritos.push("celular")
-        break;
-    case 2:
-        carritos.push("tablet")
-        break;
-    case 3:
-        carritos.push("notebook")
-        break;
-    case 4:
-        carritos.push("playstation")
-        break;
-    default:
-        alert("Opcion Incorrecta");
-}
+    let opcionProductos = parseInt(prompt("Que productos deseas comprar\n" +
+        "1. celular\n" +
+        "2. tablet\n" +
+        "3. notebook\n" +
+        "4. playstation"
+    ));
 
-let seguirComprando = prompt("Deseas comprar otro producto ? Si/No").toLowerCase()
-if(seguirComprando == "si"){
-   comprar = false;
-}else{
-    comprar = true;
-}
-}
-
-if (carritos.length === 0) {
-    alert("No agregaste ningún producto al carrito.");
-} else {
-    let seguirBorrando = true;
-
-    while (seguirBorrando && carritos.length > 0) {
-        
-        let respuestaEliminar = prompt("Tus productos son:\n" + carritos.join(" - ") + "\n\n¿Deseas borrar alguno? (Si / No)").toLowerCase();
-        
-       
-        if (respuestaEliminar !== "si") {
-            seguirBorrando = false;
-        } else {
-           
-            let productoABorrar = prompt("Ingresa el nombre exacto a borrar:\n" + carritos.join(" - "));
-
-            if (!carritos.includes(productoABorrar)) {
-                alert("Ese producto no se encuentra en el carrito.");
-            } else {
-                let indice = carritos.indexOf(productoABorrar);
-                carritos.splice(indice, 1);
-                alert("¡Producto eliminado con éxito!");
-            }
-        }
+    switch(opcionProductos){
+        case 1:
+            carritos.push(celular1);
+            break;
+        case 2:
+            carritos.push(tablet1);
+            break;
+        case 3:
+            carritos.push(notebook1);
+            break;
+        case 4:
+            carritos.push(playstation1);
+            break;
+        default:
+            alert("Opcion Incorrecta");
+            break;
     }
-    if (carritos.length === 0) {
-        alert("Te quedaste sin productos en el carrito.");
-    } else {
-        alert("¡Compra finalizada con éxito! Tu carrito final es:\n" + carritos.join(" - "));
+
+    let seguirComprando = prompt("Deseas comprar otro producto ? Si/No").toLowerCase();
+    if(seguirComprando == "si"){
+       comprar = false;
+    }else{
+        comprar = true;
     }
 }
+
+console.log(carritos)
