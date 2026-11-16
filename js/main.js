@@ -21,10 +21,12 @@ let comprar = false;
 
 while(!comprar){
     let opcionProductos = parseInt(prompt("Que productos deseas comprar\n" +
-        "1. celular\n" +
-        "2. tablet\n" +
-        "3. notebook\n" +
-        "4. playstation"
+        "1. " + celular1.marca +" "+ celular1.modelo + "\n" +
+        "2. " + tablet1.marca +" "+ tablet1.modelo + "\n" +
+        "3. "+ notebook1.modelo + "\n" +
+        "4. "+ playstation1.modelo
+        
+
     ));
 
     switch(opcionProductos){
