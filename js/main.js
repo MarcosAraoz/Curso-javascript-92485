@@ -64,24 +64,22 @@ if (carritos.length === 0) {
     let quiereBorrar = prompt("¿Deseas quitar algún producto de tu carrito? (Si / No)").toLowerCase();
 
     while (quiereBorrar === "si" && carritos.length > 0) {
-        let detalleCarrito = "";
-        let totalActual = 0;
+        const detalleCarrito = carritos.map((prod, indice) => {
+                return (indice + 1) + ". " + prod.marca + " " + prod.modelo + " - $" + prod.precio;
+            }).join("\n");
 
-        for (let i = 0; i < carritos.length; i++) {
-            detalleCarrito += (i + 1) + ". " + carritos[i].marca + " " + carritos[i].modelo + " - $" + carritos[i].precio + "\n";
-            totalActual += carritos[i].precio;
-        }
+        const totalActual = carritos.reduce((acum, prod) => {
+            return acum + prod.precio;
+        }, 0);
 
         let numeroAQuitar = parseInt(prompt(
             "Tu carrito actual:\n" +
-            detalleCarrito + "\n" +
+            detalleCarrito + "\n\n" +
             "Total actual: $" + totalActual + "\n\n" +
             "Ingresa el número del producto que deseas quitar:"
         ));
 
-        
         if (numeroAQuitar >= 1 && numeroAQuitar <= carritos.length) {
-        
             let indice = numeroAQuitar - 1;
             let eliminado = carritos[indice];
             carritos.splice(indice, 1);
@@ -100,18 +98,18 @@ if (carritos.length === 0) {
     if (carritos.length === 0) {
         alert("Tu carrito quedó vacío. ¡Gracias por visitar!");
     } else {
-        let resumenFinal = "";
-        let totalGastado = 0;
+        const resumenFinal = carritos.map((prod) => {
+                return "- " + prod.marca + " " + prod.modelo + " (" + prod.almacenamiento + "): $" + prod.precio;
+            }).join("\n");
 
-        for (const carrito of carritos) {
-            resumenFinal += "- " + carrito.marca + " " + carrito.modelo + " (" + carrito.almacenamiento + "): $" + carrito.precio + "\n";
-            totalGastado += carrito.precio;
-        }
+        const totalGastado = carritos.reduce((acum, prod) =>{
+            return acum + prod.precio;
+        }, 0);
 
         alert(
             "¡Compra finalizada!\n\n" +
             "Productos llevados:\n" +
-            resumenFinal + "\n" +
+            resumenFinal + "\n\n" +
             "Total a pagar: $" + totalGastado
         );
     }
